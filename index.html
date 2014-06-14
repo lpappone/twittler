@@ -47,7 +47,24 @@
       
       //setInterval(displayNewMessages, 5000);
 
-      $('button').on('click', displayNewMessages);
+      //loads new messages
+      $('button.load').on('click', displayNewMessages);
+
+      //prints user's message
+      $('button.send').on('click', function() {
+        var input = $('.usertweet').val();
+        var userchirp = "You: " + input;
+        var $userchirp = $('<div id=tweetlist"></div>');
+        $userchirp.text(userchirp);
+        $userchirp.appendTo($body)
+      })
+
+      //allows user to send message with "enter" instead of button click
+      $('.usertweet').on('keypress', function(event) {
+        if (event.keyCode == 13) {
+          $('button.send').click()
+        }
+      })
 
       });
 
@@ -66,6 +83,7 @@
     
     <div class="chatterbox">
       <input class="usertweet" type="text" placeholder="enter chirp!"/>
+      <button class="send">send tweet</button>
       <button class="load">load more tweets</button>
     </div>
 
