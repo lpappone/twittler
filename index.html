@@ -8,20 +8,59 @@
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+      var $body = $('body');
+      //$body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
+      var tweeted = 0;
+      var toDisplay = 0;
+      
+      var index = 0
+      var upTo = streams.home.length - 1;
+      while(index <= upTo){
+        var tweet = streams.home[index];
+        var $tweet = $('<div></div>');
+        $tweet.text(index + tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
+        $tweet.appendTo($body);
+        index ++;
+        tweeted++;
+      }
+      
+      function displayNewMessages() {
+        checkMessages();
+        var index = (streams.home.length - toDisplay);
+        console.log(streams.home.length);
+        console.log(tweeted);
+        console.log(toDisplay);
+        while(index <= (streams.home.length - 1)) { 
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.text(index + tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
-          index -= 1;
+          index ++;
+          tweeted++;
         }
+      };
+
+      function checkMessages() {
+        toDisplay = streams.home.length - tweeted;
+        return toDisplay;
+      };
+      
+      setInterval(displayNewMessages, 5000);
 
       });
 
     </script>
+
+    <h2>TWITTLER</h2>
+    
+    <div class="chatterbox">
+      <button class="load">load more tweets</button>
+    </div>
+
+    <ul class="messages">
+
+    </ul>  
+
   </body>
 </html>
