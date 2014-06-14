@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Twittler</title>
     <script src="jquery.js"></script>
-    <script src="data_generator.js"></script>
+    <script src="data_generator.js"></script>  
+    <link type="text.css" rel="stylesheet" href="stylesheet.css"/>
   </head>
   <body>
     <script>
@@ -18,7 +20,7 @@
       var upTo = streams.home.length - 1;
       while(index <= upTo){
         var tweet = streams.home[index];
-        var $tweet = $('<div></div>');
+        var $tweet = $('<div id="tweetlist"></div>');
         $tweet.text(index + tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
         $tweet.appendTo($body);
         index ++;
@@ -28,12 +30,9 @@
       function displayNewMessages() {
         checkMessages();
         var index = (streams.home.length - toDisplay);
-        console.log(streams.home.length);
-        console.log(tweeted);
-        console.log(toDisplay);
         while(index <= (streams.home.length - 1)) { 
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
+          var $tweet = $('<div id="tweetlist"></div>');
           $tweet.text(index + tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
           index ++;
@@ -54,9 +53,19 @@
 
     </script>
 
+    <div id="topbar">
+      <ul>
+        <li>Home<li>
+        <li>Notifications</li>
+        <li>Discover</li>
+        <li>Me</li>
+      </ul>
+    </div>
+
     <h2>TWITTLER</h2>
     
     <div class="chatterbox">
+      <input class="usertweet" type="text" placeholder="enter chirp!"/>
       <button class="load">load more tweets</button>
     </div>
 
