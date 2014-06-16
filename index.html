@@ -58,7 +58,7 @@
       $('button.send').on('click', function() {
         var input = $('.usertweet').val();
         var userchirp = "You: " + input;
-        var $userchirp = $('<div id=tweetlist"></div>');
+        var $userchirp = $('<div id=chirplist"></div>');
         $userchirp.text(userchirp);
         $userchirp.appendTo($body)
       })
@@ -69,8 +69,6 @@
           $('button.send').click()
         }
       })
-
-      $("div:contains('shawndrost')").css("text-decoration", "underline");
     
 
       });

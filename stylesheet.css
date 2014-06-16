@@ -37,9 +37,27 @@ h2 {
 	margin-bottom: 2px;
 }
 
-:contains('shawndrost') {
-	color: red;
-	}
+#chirplist {
+	padding: 2px;
+	border-style: groove;
+	border-width: 1px;
+	border-color: blue;
+	margin-bottom: 2px;
+}
+
+.chatterbox {
+	border-style: groove;
+	border-width: 3px;
+	border-color: green;
+	border-radius: 10px;
+}
+
+.send {
+	background-color: #3ea055
+}
+.load {
+	background-color: #82caff;
+}
 
 
 
