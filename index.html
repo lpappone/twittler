@@ -51,18 +51,21 @@
       //$(document).on('click', '.filter', showTimeline);
 
       $(document).on('click', '.filter', function() {
-      	$messages.html('');
+      	$messages.hide();
       	//var htmlString = $(this).get().innerHTML;
       	var user = $(this).text();
       	//console.log(user);
       	//console.log(streams.users[user]);
       	for (var i = 0; i < streams.users[user].length; i++) {
-      	  $body.append("div id='timeline'>" + streams.users[user][i] + "</div>");
+      	  $('.userline').append("div id='timeline'>" + streams.users[user][i] + "</div>");
       	}
       });
 
       //to return home after viewing a timeline
-      $(document).on('click', '.refresh', displayNewMessages);
+      $(document).on('click', '.refresh', function() {
+        $('.userline').hide();
+      	$messages.show();
+      });
 
       //prints user's message
       $('button.send').on('click', function() {
@@ -103,9 +106,11 @@
       <button class="load">load more tweets</button>
     </div>
 
-    <ul class="messages">
+    <div class="container">
+      <ul class="messages"></ul>
+      <ul class="userline"></ul>
+    </div>
 
-    </ul>  
 
   </body>
 </html>
