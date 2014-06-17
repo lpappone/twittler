@@ -12,22 +12,16 @@
       $(document).ready(function(){
       var $body = $('body');
       var $messages = $('.messages');
-
       var tweeted = 0;
       var toDisplay = 0; 
       var index = 0
-      var upTo = streams.home.length - 1;
      
-      
       function displayNewMessages() {
         checkMessages();
         var index = (streams.home.length - toDisplay);
         while(index <= (streams.home.length - 1)) { 
           var tweet = streams.home[index];
-          //var $tweet = $('<div id="tweetlist"></div>');
-          //$tweet.text(index + tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
-          //$tweet.appendTo($body);
-          $messages.append("<div id='tweetlist'>" + tweet.created_at + "<a href='#' class='filter'>" + tweet.user + "</a>: " + tweet.message + "</div>");
+          $messages.append("<div id='tweetlist'>" + tweet.created_at + " @" + "<a href='#' class='filter'>" + tweet.user + "</a>: " + tweet.message + "</div>");
           index ++;
           tweeted++;
         }
@@ -38,26 +32,16 @@
         return toDisplay;
       };
 
-      // function showTimeline() { 
-      // 	console.log(streams.users[user]);
-      // 	$body.append("div id='timeline'>" + streams.users[user] + "</div>");
-      // }
-      
-      //setInterval(displayNewMessages, 5000);
-
       //loads new messages
       $('button.load').on('click', displayNewMessages);
 
-      //$(document).on('click', '.filter', showTimeline);
-
+      //shows user's timeline by clicking on username
       $(document).on('click', '.filter', function() {
       	$messages.hide();
-      	//var htmlString = $(this).get().innerHTML;
       	var user = $(this).text();
-      	//console.log(user);
-      	//console.log(streams.users[user]);
       	for (var i = 0; i < streams.users[user].length; i++) {
-      	  $('.userline').append("div id='timeline'>" + streams.users[user][i] + "</div>");
+      	  var tweet = streams.users[user][i];
+      	  $('.userline').append("<div id='timeline'>" + tweet.created_at + " @" + tweet.user + " " + tweet.message + "</div>");
       	}
       });
 
@@ -70,11 +54,7 @@
       //prints user's message
       $('button.send').on('click', function() {
         var input = $('.usertweet').val();
-        //var userchirp = "You: " + input;
-        //var $userchirp = $('<div id=chirplist"></div>');
-        //$userchirp.text(userchirp);
-        //$userchirp.appendTo($body)
-        $body.append("<div id='chirplist'>" + Date.now() + " You: " + input + "</div>");
+        $messages.append("<div id='chirplist'>" + Date.now() + " You: " + input + "</div>");
       })
 
       //allows user to send message with "enter" instead of button click
