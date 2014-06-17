@@ -47,6 +47,8 @@
       //loads new messages
       $('button.load').on('click', displayNewMessages);
 
+      $(document).on('click', '.filter', displayNewMessages//placeholder function);
+
       //prints user's message
       $('button.send').on('click', function() {
         var input = $('.usertweet').val();
