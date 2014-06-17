@@ -11,7 +11,7 @@
 
       $(document).ready(function(){
       var $body = $('body');
-      //$body.html('');
+      var $messages = $('.messages');
 
       var tweeted = 0;
       var toDisplay = 0; 
@@ -27,7 +27,7 @@
           //var $tweet = $('<div id="tweetlist"></div>');
           //$tweet.text(index + tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
           //$tweet.appendTo($body);
-          $body.append("<div id='tweetlist'>" + tweet.created_at + "<a href='#' class='filter'>" + tweet.user + "</a>: " + tweet.message + "</div>");
+          $messages.append("<div id='tweetlist'>" + tweet.created_at + "<a href='#' class='filter'>" + tweet.user + "</a>: " + tweet.message + "</div>");
           index ++;
           tweeted++;
         }
@@ -38,16 +38,31 @@
         return toDisplay;
       };
 
-      function showTimeline() {
-        
-      }
+      // function showTimeline() { 
+      // 	console.log(streams.users[user]);
+      // 	$body.append("div id='timeline'>" + streams.users[user] + "</div>");
+      // }
       
       //setInterval(displayNewMessages, 5000);
 
       //loads new messages
       $('button.load').on('click', displayNewMessages);
 
-      $(document).on('click', '.filter', displayNewMessages//placeholder function);
+      //$(document).on('click', '.filter', showTimeline);
+
+      $(document).on('click', '.filter', function() {
+      	$messages.html('');
+      	//var htmlString = $(this).get().innerHTML;
+      	var user = $(this).text();
+      	//console.log(user);
+      	//console.log(streams.users[user]);
+      	for (var i = 0; i < streams.users[user].length; i++) {
+      	  $body.append("div id='timeline'>" + streams.users[user][i] + "</div>");
+      	}
+      });
+
+      //to return home after viewing a timeline
+      $(document).on('click', '.refresh', displayNewMessages);
 
       //prints user's message
       $('button.send').on('click', function() {
@@ -73,7 +88,7 @@
 
     <div id="topbar">
       <ul>
-        <li>Home<li>
+        <li> <a href='#' class='refresh'>Home</a><li>
         <li>Notifications</li>
         <li>Discover</li>
         <li>Me</li>
